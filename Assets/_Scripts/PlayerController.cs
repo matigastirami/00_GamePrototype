@@ -5,7 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
-    private float _moveSpeed = 20f, _rotateSpeed = 180f, _force = 50f;
+    [SerializeField]
+    private float _moveSpeed = 20f, _rotateSpeed = 1f, _force = 2f;
 
     private Rigidbody _rigidBody;
 
@@ -38,8 +39,8 @@ public class PlayerController : MonoBehaviour
         {
             // If using physics, use "addForce" on the RigidBody (Moving) and "addTorque" (Rotating)
             // Conceptually, when using forces we apply a force and not a speed, try always to put correct names.
-            _rigidBody.AddForce(Vector3.forward * (Time.deltaTime * _force * _verticalInput));
-            _rigidBody.AddTorque(Vector3.up * (_force * Time.deltaTime * _horizontalInput), ForceMode.Force);
+            _rigidBody.AddForce(Vector3.forward * (_force * _verticalInput));
+            _rigidBody.AddTorque(Vector3.up * (_rotateSpeed * _horizontalInput), ForceMode.Force);
         }
         else
         {
